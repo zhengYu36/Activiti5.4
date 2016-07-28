@@ -1,0 +1,32 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+
+	<!-- 
+	
+		processEngineConfiguration.setJdbcDriver("com.mysql.jdbc.Driver");
+		processEngineConfiguration.setJdbcUrl("jdbc:mysql://localhost:3306/itcase160720?useUnicode=true&characterEncoding=utf8");
+		processEngineConfiguration.setJdbcUsername("root");
+		processEngineConfiguration.setJdbcPassword("root");
+	 -->
+
+	<!-- 下面又要去通过spring的方式去注入参数了，如果忘了spring，自己可以回去看看这个框架哈 -->
+	<!-- 第一步是配置流程引擎的配置类,注意这个id是那个类，首字母的小写，class是里面要返回的那个类哈 -->
+	<bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+		<!-- 连接数据的配置 -->
+		<property name="jdbcDriver" value="com.mysql.jdbc.Driver"></property>
+		<!-- 注意：这里的url里面要加入 &amp转义字符,不过这里的原理我目前也不是很懂的哈 -->
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/itcase160720?useUnicode=true&amp;characterEncoding=utf8"></property>
+		<property name="jdbcUsername" value="root"></property>
+		<property name="jdbcPassword" value="root"></property>
+		
+		<!-- 没有表创建表 -->
+		<property name="databaseSchemaUpdate" value="true"></property>
+	
+	</bean>
+
+</beans>
